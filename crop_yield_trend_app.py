@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar  5 09:51:42 2023
 
-@author: asus
-"""
 
 import streamlit as st
 import pandas as pd
-import numpy as np
 from bokeh.plotting import figure
 from bokeh.models import RangeTool,HoverTool
 from bokeh.layouts import column
@@ -106,8 +100,8 @@ with ets_t:
        y_axis_label="Crop Yield (in Tonnes/ha)", x_axis_type="datetime",width=1500, height=400,tools='xpan',
      x_axis_location="above",x_range=(ets.index[10],ets.index[63]))
     q.line(ets.index,ets['Actual'], legend_label="Actual", color="red",line_width=3)
-    q.line(ets.index[:48],ets.loc[:"2007-04-01",'Predicted'],legend_label="Train Pred",color="blue")
-    q.line(ets.index[47:60],ets.loc["2007-04-01":"2019-04-01",'Predicted'],legend_label="Test Pred",color="orange")
+    q.line(ets.index[:48],ets.loc[:"2008-04-01",'Predicted'],legend_label="Train Pred",color="blue")
+    q.line(ets.index[47:60],ets.loc["2007-04-01":"2020-04-01",'Predicted'],legend_label="Test Pred",color="orange")
     q.line(ets.index[59:],ets.loc["2019-04-01":,'Predicted'],legend_label="Future Forecast",color="green")
     q.legend.location='top_left'
     q.add_tools(HoverTool(tooltips=
@@ -156,8 +150,8 @@ with sarima_t:
        y_axis_label="Crop Yield (in Tonnes/ha)", x_axis_type="datetime",width=1500, height=400,tools='xpan',
      x_axis_location="above",x_range=(sarima.index[10],sarima.index[62]))
     w.line(sarima.index,sarima['Actual'], legend_label="Actual", color="red",line_width=2)
-    w.line(sarima.index[:47],sarima.loc[:"2007-04-01",'Predicted'],legend_label="Train Pred",color="blue")
-    w.line(sarima.index[47:58],sarima.loc["2007-04-01":"2019-04-01",'Predicted'],legend_label="Test Pred",color="orange")
+    w.line(sarima.index[:47],sarima.loc[:"2008-04-01",'Predicted'],legend_label="Train Pred",color="blue")
+    w.line(sarima.index[46:59],sarima.loc["2007-04-01":"2020-04-01",'Predicted'],legend_label="Test Pred",color="orange")
     w.line(sarima.index[58:],sarima.loc["2019-04-01":,'Predicted'],legend_label="Future Forecast",color="green")
     w.legend.location='top_left'
     w.add_tools(HoverTool(tooltips=
@@ -206,8 +200,8 @@ with prophet_t:
        y_axis_label="Crop Yield (in Tonnes/ha)", x_axis_type="datetime",width=1500, height=400,tools='xpan',
      x_axis_location="above",x_range=(prophet.index[10],prophet.index[63]))
     r.line(prophet.index,prophet['Actual'], legend_label="Actual", color="red",line_width=2)
-    r.line(prophet.index[:47],prophet.loc[:"2007-04-01",'Predicted'],legend_label="Train Pred",color="blue")
-    r.line(prophet.index[47:59],prophet.loc["2007-04-01":"2019-04-01",'Predicted'],legend_label="Test Pred",color="orange")
+    r.line(prophet.index[:48],prophet.loc[:"2008-04-01",'Predicted'],legend_label="Train Pred",color="blue")
+    r.line(prophet.index[47:60],prophet.loc["2007-04-01":"2020-04-01",'Predicted'],legend_label="Test Pred",color="orange")
     r.line(prophet.index[59:],prophet.loc["2019-04-01":,'Predicted'],legend_label="Future Forecast",color="green")
     r.legend.location='top_left'
     r.add_tools(HoverTool(tooltips=
@@ -256,7 +250,7 @@ with auto_arima_t:
        y_axis_label="Crop Yield (in Tonnes/ha)", x_axis_type="datetime",width=1500, height=400,tools='xpan',
      x_axis_location="above",x_range=(auto_arima.index[3],auto_arima.index[16]))
     zx.line(auto_arima.index,auto_arima['Actual'], legend_label="Actual", color="red",line_width=2)
-    zx.line(auto_arima.index[:12],auto_arima.loc["2007-04-01":"2019-04-01",'Predicted'],legend_label="Test Pred",color="orange")
+    zx.line(auto_arima.index[:13],auto_arima.loc["2007-04-01":"2020-04-01",'Predicted'],legend_label="Test Pred",color="orange")
     zx.line(auto_arima.index[12:],auto_arima.loc["2019-04-01":,'Predicted'],legend_label="Future Forecast",color="green")
     zx.legend.location='top_left'
     zx.add_tools(HoverTool(tooltips=
@@ -299,8 +293,8 @@ with lr_t:
        y_axis_label="Crop Yield (in Tonnes/ha)", x_axis_type="datetime",width=1500, height=400,tools='xpan',
      x_axis_location="above",x_range=(lr.index[8],lr.index[54]))
     xz.line(lr.index,lr['Actual'], legend_label="Actual", color="red",line_width=2)
-    xz.line(lr.index[:41],lr.loc[:"2007-04-01",'Predicted'],legend_label="Train Pred",color="blue")
-    xz.line(lr.index[41:53],lr.loc["2007-04-01":"2019-04-01",'Predicted'],legend_label="Test Pred",color="orange")
+    xz.line(lr.index[:42],lr.loc[:"2008-04-01",'Predicted'],legend_label="Train Pred",color="blue")
+    xz.line(lr.index[41:54],lr.loc["2007-04-01":"2020-04-01",'Predicted'],legend_label="Test Pred",color="orange")
     xz.line(lr.index[53:],lr.loc["2019-04-01":,'Predicted'],legend_label="Future Forecast",color="green")
     xz.legend.location='top_left'
     xz.add_tools(HoverTool(tooltips=
@@ -345,35 +339,5 @@ with lr_t:
 
     with c9:
         st.metric('Train MAPE',str(lr_train_mape)+"%")
-
-
-
-#%%
-
-# fig=plt.figure(figsize=(15,6))
-# plt.plot(ets[['Actual']],color='red',label="Actual")
-# plt.plot(ets.loc[:"2007-04-01",'Predicted'],color='blue',label="Train Pred")
-# plt.plot(ets.loc["2007-04-01":"2019-04-01",'Predicted'],color='Yellow',label="Test Pred")
-# plt.plot(ets.loc["2019-04-01":,'Predicted'],color='green',label="Future Forecast")
-# plt.grid()
-# plt.legend()
-# #plt.show()
-# st.pyplot(fig)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
